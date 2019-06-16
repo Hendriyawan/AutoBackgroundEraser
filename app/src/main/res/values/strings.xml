@@ -6,7 +6,6 @@
     <string name="nav_header_subtitle">version 1.1.2</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="share">Share</string>
     <string name="select_a_photo">Select a Photo</string>
     <string name="dialog_menu_title">Choose Options</string>
     <string name="request_permission_message">Set permission first</string>
@@ -14,4 +13,22 @@
     <string name="text_progress">Please wait</string>
     <string name="button_start">Start</string>
     <string name="button_select_photo">Select a Photo</string>
+    <!-- error message -->
+    <string name="error_code_400">File to large</string>
+    <string name="error_code_402">Insufficient credits</string>
+    <string name="error_code_403">"Missing API Key</string>
+    <string name="error_code_429">"Rate limit exceeded</string>
+    <string name="api_key">API Key</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="text_button_next">NEXT</string>
+    <string name="text_button_skip">SKIP</string>
+    <string name="text_button_done">DONE</string>
+    <string name="signup_removebg"><a href="https://www.remove.bg/users/sign_up">REGISTER</a></string>
+    <string name="text_signup_message">Please click REGISTER below and register using an email account or use the social media listed, and fill in the requested field.</string>
+    <string name="text_message_tutorial_2">After that the verification link will be sent to your email</string>
+    <string name="text_message_tutorial_3">After that, click Confirm my account</string>
+    <string name="text_message_tutorial_4">Please find the API menu then click</string>
+    <string name="text_message_tutorial_5">then click Get API Key</string>
+    <string name="text_message_tutorial_6">After that click Show, and copy paste the available API key</string>
+
 </resources>

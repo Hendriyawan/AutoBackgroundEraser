@@ -5,8 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
-            android:title="@string/share" />
+            android:id="@+id/nav_set_apikey"
+            android:icon="@drawable/ic_action_apikey"
+            android:title="@string/api_key" />
+        <item android:id="@+id/nav_tutorial"
+            android:title="@string/tutorial"
+            android:icon="@drawable/ic_action_tutorial"/>
     </group>
 </menu>

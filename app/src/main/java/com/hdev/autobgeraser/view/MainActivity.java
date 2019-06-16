@@ -3,6 +3,7 @@ package com.hdev.autobgeraser.view;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -53,6 +54,7 @@ import top.defaults.checkerboarddrawable.CheckerboardDrawable;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MenuDialogListener.OnMenuSelect, RemoverView {
     private static final int GALLERY_REQUEST_CODE = 1;
+    private static final int GALLERY_REQUEST_BG_CODE = 3;
     private static final int CAMERA_REQUEST_CODE = 2;
     @BindString(R.string.button_start)
     String textStart;
@@ -68,30 +70,30 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.cv_main)
     CardView cardViewMain;
     @BindView(R.id.cv_selected_replace_bg)
-    CardView cvSelectedReplaceBg;
+    CardView cardViewSelectedReplaceBackground;
     @BindView(R.id.cv_result)
     CardView cardViewResult;
     @BindView(R.id.iv_selected)
     ImageView selectedImage;
     @BindView(R.id.iv_selected_replace_bg)
-    ImageView selectedReplaceBg;
+    ImageView selectedReplaceBackground;
     @BindView(R.id.iv_transparent_bg)
-    ImageView transparentBg;
+    ImageView transparentBackground;
     @BindView(R.id.iv_result)
     ImageView resultImage;
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     @BindView(R.id.tv_progress)
-    TextView tvProgress;
+    TextView textViewProgress;
     @BindView(R.id.btn_select_picker)
     Button buttonSelectPicker;
 
-
-    private MenuImagePickerDialog menuDialog;
     private boolean granted;
     private boolean isOptionEnabled = false;
     private boolean start = false;
     private String base64;
+    private File backgroundImageFile;
+    private MenuImagePickerDialog menuDialog;
     private RemoverPresenter removerPresenter;
 
     @Override
@@ -105,16 +107,17 @@ public class MainActivity extends AppCompatActivity
         initNavigationView();
         initPathDownloaded();
         initTransparentBackground();
-        removerPresenter = new RemoverPresenter(this);
-        removerPresenter.loadApiKey();
+        removerPresenter = new RemoverPresenter(this, this);
+        //removerPresenter.loadApiKey();
     }
 
     //Button Select Picker of Photo
     @OnClick(R.id.btn_select_picker)
     public void onSelectPhoto() {
         if (start) {
-            removerPresenter.removeByBase64(base64);
-
+            if (backgroundImageFile != null) {
+                removerPresenter.removeByBase64WithReplaceBg(base64, backgroundImageFile);
+            }
         } else {
             //do request permission first
             if (requestPermissions()) {
@@ -128,8 +131,13 @@ public class MainActivity extends AppCompatActivity
     //OnCheckedChanged CheckBox to enable/disable option automatically replace deleted Background
     @OnCheckedChanged(R.id.cb_auto_replace_bg)
     public void onChecked(boolean checked) {
-        cvSelectedReplaceBg.setVisibility(checked ? View.VISIBLE : View.GONE);
+        cardViewSelectedReplaceBackground.setVisibility(checked ? View.VISIBLE : View.GONE);
         isOptionEnabled = checked;
+    }
+
+    @OnClick(R.id.ib_add_image_replace_bg)
+    public void onSelectImageBG() {
+        pickImageFromGallery(GALLERY_REQUEST_BG_CODE);
     }
 
     @Override
@@ -156,19 +164,24 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        switch (item.getItemId()) {
+            case R.id.nav_tutorial:
+                startActivity(new Intent(this, TutorialActivity.class));
+                closeDrawer();
+                break;
+        }
+        return false;
     }
 
     @Override
     public void onMenuSelected(int menu) {
         switch (menu) {
             case MenuDialog.PICK_FROM_CAMERA:
-                //pickFromCamera();
+                pickFromCamera();
                 break;
 
             case MenuDialog.PICK_FROM_GALLERY:
-                pickImageFromGallery();
+                pickImageFromGallery(GALLERY_REQUEST_CODE);
                 break;
 
             case MenuDialog.PICK_FROM_URL:
@@ -181,33 +194,31 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStartProgress() {
         progressBar.setVisibility(View.VISIBLE);
-        tvProgress.setVisibility(View.VISIBLE);
+        textViewProgress.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void onStopProgress() {
         progressBar.setVisibility(View.GONE);
-        tvProgress.setVisibility(View.GONE);
+        textViewProgress.setVisibility(View.GONE);
     }
 
     @Override
     public void onBackgroundRemoved(Bitmap result) {
-        if (result != null) {
-            buttonSelectPicker.setText(textSelectPhoto);
-            if (cardViewResult.getVisibility() == View.GONE) {
-                cardViewResult.setVisibility(View.VISIBLE);
-                resultImage.setImageBitmap(result);
-            }
-        }
-
+        start = false;
+        buttonSelectPicker.setText(textSelectPhoto);
+        cardViewResult.setVisibility(View.VISIBLE);
+        resultImage.setImageBitmap(result);
     }
 
     @Override
     public void onFailed(String message) {
-        tvProgress.setVisibility(View.VISIBLE);
-        tvProgress.setText(message);
-        tvProgress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_info_outline_error, 0, 0, 0);
+        start = false;
+        buttonSelectPicker.setText(textSelectPhoto);
+        textViewProgress.setVisibility(View.VISIBLE);
+        textViewProgress.setText(message);
+        textViewProgress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_info_outline_error, 0, 0, 0);
     }
 
     @Override
@@ -225,7 +236,6 @@ public class MainActivity extends AppCompatActivity
                             base64 = Encoder.imageUriToBase64(this, uri);
 
                         } else {
-
                             base64 = Encoder.imageUriToBase64(this, uri);
                             selectedImage.setImageURI(uri);
                             removerPresenter.removeByBase64(base64);
@@ -233,8 +243,13 @@ public class MainActivity extends AppCompatActivity
                         }
                         break;
 
+                    case GALLERY_REQUEST_BG_CODE:
+                        selectedReplaceBackground.setImageURI(uri);
+                        backgroundImageFile = new File(getRealPathFromURI(uri));
+                        break;
+
                     case CAMERA_REQUEST_CODE:
-                        transparentBg.setImageURI(uri);
+                        selectedImage.setImageURI(uri);
                         break;
                 }
 
@@ -288,14 +303,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     //Pick Image from Gallery
-    private void pickImageFromGallery() {
+    private void pickImageFromGallery(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         intent.putExtra("scale", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+        startActivityForResult(intent, requestCode);
     }
 
     //show toast
@@ -322,6 +337,22 @@ public class MainActivity extends AppCompatActivity
                 .colorEven(Color.DKGRAY)
                 .size(20)
                 .build();
-        transparentBg.setImageDrawable(drawable);
+        transparentBackground.setImageDrawable(drawable);
+    }
+
+    //get Real Path from Uri
+    private String getRealPathFromURI(Uri uri) {
+        String result;
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        if (cursor == null) {
+            result = uri.getPath();
+
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
 }

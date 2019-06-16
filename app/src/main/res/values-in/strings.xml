@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Auto Background Eraser</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Auto Backrgound Eraser</string>
+    <string name="nav_header_subtitle">version 1.1.2</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="select_a_photo">Pilih foto</string>
+    <string name="dialog_menu_title">Pilih opsi</string>
+    <string name="request_permission_message">Atur izin terlebih dahulu</string>
+    <string name="automatically_replace_bg_text">Secara otomatis menggantikan latar belakang yang dihapus</string>
+    <string name="text_progress">Tunggu sebentar</string>
+    <string name="button_start">Mulai</string>
+    <string name="button_select_photo">Pilih foto</string>
+    <!-- error message -->
+    <string name="error_code_400">File terlalu besar</string>
+    <string name="error_code_402">Kredit tidak cukup</string>
+    <string name="error_code_403">"Kunci API tidak ada</string>
+    <string name="error_code_429">"Batas tingkat terlampaui</string>
+    <string name="api_key">Kunci API</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="text_button_next">LANJUT</string>
+    <string name="text_button_skip">LEWATI</string>
+    <string name="text_button_done">SELESAI</string>
+    <string name="signup_removebg"><a href="https://www.remove.bg/users/sign_up">DAFTAR</a></string>
+    <string name="text_signup_message">Silahkan klik DAFTAR dibawah ini dan mendaftar dengan menggunakan akun email atau menggunakan social media yang tertera, dan isi kolom yang diminta.</string>
+    <string name="text_message_tutorial_2">Setelah itu link verifikasi akan dikirim ke email Anda</string>
+    <string name="text_message_tutorial_3">Setelah itu, klik Confirm my account</string>
+    <string name="text_message_tutorial_4">Silahkan cari menu API lalu klik</string>
+    <string name="text_message_tutorial_5">Lalu klik Get API Key</string>
+    <string name="text_message_tutorial_6">Setelah itu klik Show, dan copy paste API Key yang tersedia.</string>
+
+
+</resources>
