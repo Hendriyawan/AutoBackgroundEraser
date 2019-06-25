@@ -8,8 +8,10 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hdev.autobgeraser.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
@@ -41,6 +43,10 @@ public class ViewPagerAdapter extends PagerAdapter {
             TextView signUpLink = (TextView) view.findViewById(R.id.tv_link_signup);
             signUpLink.setMovementMethod(LinkMovementMethod.getInstance());
         }
+
+        ImageView imageScreenshot = (ImageView) view.findViewById(R.id.iv_screenshot);
+        setImage(imageScreenshot, position);
+
         container.addView(view);
         return view;
     }
@@ -50,5 +56,35 @@ public class ViewPagerAdapter extends PagerAdapter {
         ViewPager viewPager = (ViewPager) container;
         View view = container;
         viewPager.removeView(view);
+    }
+
+    //set ImageView
+    private void setImage(ImageView imageScreenshot, int position){
+        switch (position){
+            case 0:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_1)).into(imageScreenshot);
+                break;
+
+            case 1:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_2)).into(imageScreenshot);
+                break;
+
+            case 2:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_3)).into(imageScreenshot);
+                break;
+
+            case 3:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_4)).into(imageScreenshot);
+                break;
+
+            case 4:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_5)).into(imageScreenshot);
+                break;
+
+            case 5:
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.tutorial_6)).into(imageScreenshot);
+                break;
+        }
+
     }
 }

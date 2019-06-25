@@ -17,4 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
+        <item name="hintTextAppearance">@style/AppTheme.HintTextAppearance</item>
+    </style>
+
+    <style name="AppTheme.HintTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
 </resources>

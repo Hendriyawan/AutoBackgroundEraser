@@ -6,30 +6,48 @@ import android.preference.PreferenceManager;
 
 public class AppPreferences {
 
+    private static AppPreferences appPreferences;
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
 
-    public static void savePath(Context context, String path) {
+    private AppPreferences(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static AppPreferences getInstance(Context context) {
+        if (appPreferences == null) {
+            appPreferences = new AppPreferences(context.getApplicationContext());
+        }
+        return appPreferences;
+    }
+
+    public static String getPath(){
+        return sharedPreferences.getString("path_downloaded", "");
+    }
+
+    public static void savePath(String path) {
         editor = sharedPreferences.edit();
         editor.putString("path_downloaded", path);
         editor.apply();
     }
 
-    public static void saveTempFile(Context context, String fileName) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public static boolean getFirstLaunch() {
+        return sharedPreferences.getBoolean("first_launch", true);
+    }
+
+    public static void setFirstLaunch(boolean isFisrt) {
         editor = sharedPreferences.edit();
-        editor.putString("temp_file", fileName);
+        editor.putBoolean("first_launch", isFisrt);
         editor.apply();
     }
 
-    public static String getPath(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("path_downloaded", "");
+    public static String getApiKey() {
+        return sharedPreferences.getString("api_key", "");
     }
 
-    public static String getTempFile(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("temp_file", "");
+    public static void setApiKey(String apiKey) {
+        editor = sharedPreferences.edit();
+        editor.putString("api_key", apiKey);
+        editor.apply();
     }
 }

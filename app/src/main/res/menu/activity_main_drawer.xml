@@ -8,8 +8,18 @@
             android:id="@+id/nav_set_apikey"
             android:icon="@drawable/ic_action_apikey"
             android:title="@string/api_key" />
+
         <item android:id="@+id/nav_tutorial"
             android:title="@string/tutorial"
             android:icon="@drawable/ic_action_tutorial"/>
+
+        <item android:id="@+id/nav_rating"
+            android:title="@string/rate_us"
+            android:icon="@drawable/ic_action_star"/>
+
+        <item android:id="@+id/nav_about_app"
+            android:title="@string/about_app"
+            android:icon="@drawable/ic_action_about"/>
+
     </group>
 </menu>

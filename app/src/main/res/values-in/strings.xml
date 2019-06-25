@@ -2,8 +2,7 @@
     <string name="app_name">Auto Background Eraser</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Auto Backrgound Eraser</string>
-    <string name="nav_header_subtitle">version 1.1.2</string>
+    <string name="nav_header_title">Auto Background Eraser</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Pengaturan</string>
     <string name="select_a_photo">Pilih foto</string>
@@ -18,18 +17,41 @@
     <string name="error_code_402">Kredit tidak cukup</string>
     <string name="error_code_403">"Kunci API tidak ada</string>
     <string name="error_code_429">"Batas tingkat terlampaui</string>
-    <string name="api_key">Kunci API</string>
+    <string name="api_key">API Key</string>
     <string name="tutorial">Tutorial</string>
     <string name="text_button_next">LANJUT</string>
     <string name="text_button_skip">LEWATI</string>
     <string name="text_button_done">SELESAI</string>
     <string name="signup_removebg"><a href="https://www.remove.bg/users/sign_up">DAFTAR</a></string>
-    <string name="text_signup_message">Silahkan klik DAFTAR dibawah ini dan mendaftar dengan menggunakan akun email atau menggunakan social media yang tertera, dan isi kolom yang diminta.</string>
+    <string name="text_signup_message">Silahkan klik DAFTAR dibawah ini dan mendaftar dengan menggunakan akun email atau menggunakan sosial media yang tertera, dan isi kolom yang diminta.</string>
     <string name="text_message_tutorial_2">Setelah itu link verifikasi akan dikirim ke email Anda</string>
     <string name="text_message_tutorial_3">Setelah itu, klik Confirm my account</string>
     <string name="text_message_tutorial_4">Silahkan cari menu API lalu klik</string>
     <string name="text_message_tutorial_5">Lalu klik Get API Key</string>
     <string name="text_message_tutorial_6">Setelah itu klik Show, dan copy paste API Key yang tersedia.</string>
+    <string name="dialog_first_launch_message">Baca tutorial berikut untuk mengetahui cara menggunakan aplikasi ini.</string>
+    <string name="dialog_first_launch_later_button">Nanti</string>
+    <string name="dialog_first_launch_read_button">Baca Tutorial</string>
+    <string name="set_api_key_hint">Masukan API Key</string>
+    <string name="text_button_save">SIMPAN</string>
+    <string name="text_button_cancel">BATAL</string>
+    <string name="rate_us">Nilai Kami</string>
+    <string name="input_api_key_empty_message">Tidak boleh kosong !</string>
+    <string name="about_app">Tentang Aplikasi</string>
+    <string name="privacy_policies">Privacy Policies</string>
+    <string name="toolbar_title_about">Tentang App</string>
+    <string name="toolbar_title_privacy_policy">Privacy Policy</string>
+    <string name="about_app_text">Auto Background Eraser adalah Aplikasi alat photo background editor perantara yang didesain simple dan elegan. Auto Background Eraser menghapus background gambar kini dapat dilakukan dengan mudah dengan memanfaatkan API dari situs https://remove.bg</string>
+    <string name="popup_menu_save_title">Simpan</string>
+    <string name="update">Update</string>
+    <string name="cancel">Batal</string>
+    <string name="err_message_bg_image_file_null"> Harap atur gambar yang akan digunakan untuk mengganti latar belakang yang dihapus</string>
+    <string name="err_message_no_api_key_set">Kunci API belum diatur, silahkan buka menu Kunci API dan atur kunci API terlebih dahulu, atau baca tutorial berikut untuk mendapatkan Kunci API</string>
+    <string name="button_positive_dialog_warning">Baca tutorial</string>
+    <string name="button_negative_dialog_warning">Batal</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">News</string>
 
 
 </resources>

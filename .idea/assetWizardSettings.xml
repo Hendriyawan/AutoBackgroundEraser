@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/home/gdev/Apps/android/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_book_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/home/gdev/Apps/android/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_notifications_active_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,7 +44,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_tutorial" />
+                                      <entry key="outputName" value="ic_action_notification" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>
@@ -127,6 +127,11 @@
                 </map>
               </option>
             </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState />
           </value>
         </entry>
       </map>
